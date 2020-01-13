@@ -239,24 +239,15 @@ namespace op
                 }
                 else if (rotationAngleInt == 90 || rotationAngleInt == -270)
                 {
-                    cv::transpose(cvMatFrame, cvMatFrame);
-                    if (!flipFrame)
-                        cv::flip(cvMatFrame, cvMatFrame, 0);
+                    cv::rotate(cvMatFrame, cvMatFrame, cv::ROTATE_90_CLOCKWISE);
                 }
                 else if (rotationAngleInt == 180 || rotationAngleInt == -180)
                 {
-                    if (flipFrame)
-                        cv::flip(cvMatFrame, cvMatFrame, 0);
-                    else
-                        cv::flip(cvMatFrame, cvMatFrame, -1);
+                    cv::rotate(cvMatFrame, cvMatFrame, cv::ROTATE_180);
                 }
                 else if (rotationAngleInt == 270 || rotationAngleInt == -90)
                 {
-                    cv::transpose(cvMatFrame, cvMatFrame);
-                    if (flipFrame)
-                        cv::flip(cvMatFrame, cvMatFrame, -1);
-                    else
-                        cv::flip(cvMatFrame, cvMatFrame, 1);
+                    cv::rotate(cvMatFrame, cvMatFrame, cv::ROTATE_90_COUNTERCLOCKWISE);
                 }
                 else
                     error("Rotation angle = " + std::to_string(rotationAngleInt)

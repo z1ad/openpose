@@ -254,7 +254,7 @@ namespace op
                 else if (property == ProducerProperty::Rotation)
                 {
                     checkBool(
-                        value == 0. || value == 90. || value == 180. || value == 270.,
+                        value == 0. || value == 90. || value == -90. || value == 180. || value == -180. || value == 270. || value == -270.,
                         "ProducerProperty::Rotation only implemented for {0, 90, 180, 270} degrees.",
                         __LINE__, __FUNCTION__, __FILE__);
                 }

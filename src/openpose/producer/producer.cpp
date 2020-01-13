@@ -304,7 +304,7 @@ namespace op
                     width = get(CV_CAP_PROP_FRAME_HEIGHT);
                 }
 
-                if (mType != ProducerType::ImageDirectory
+                /*if (mType != ProducerType::ImageDirectory
                       && ((frame.cols() != width && width > 0)
                           || (frame.rows() != height && height > 0)))
                 {
@@ -314,7 +314,7 @@ namespace op
                         + " vs. " + std::to_string(frame.cols()) + "x" + std::to_string(frame.rows()),
                         Priority::Max, __LINE__, __FUNCTION__, __FILE__);
                     frame = Matrix();
-                }
+                }*/
             }
         }
         catch (const std::exception& e)

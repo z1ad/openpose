@@ -229,6 +229,8 @@ namespace op
         try
         {
             cv::Mat cvMatFrame = OP_OP2CVMAT(frame);
+            cv::Mat dst;
+
             if (!cvMatFrame.empty())
             {
                 const auto rotationAngleInt = (int)std::round(rotationAngle) % 360;
@@ -239,28 +241,21 @@ namespace op
                 }
                 else if (rotationAngleInt == 90 || rotationAngleInt == -270)
                 {
-                    cv::transpose(cvMatFrame, cvMatFrame);
-                    if (!flipFrame)
-                        cv::flip(cvMatFrame, cvMatFrame, 0);
+                    cv::rotate(cvMatFrame, dst, cv::ROTATE_90_CLOCKWISE);
                 }
                 else if (rotationAngleInt == 180 || rotationAngleInt == -180)
                 {
-                    if (flipFrame)
-                        cv::flip(cvMatFrame, cvMatFrame, 0);
-                    else
-                        cv::flip(cvMatFrame, cvMatFrame, -1);
+                    cv::rotate(cvMatFrame, dst, cv::ROTATE_180);
                 }
                 else if (rotationAngleInt == 270 || rotationAngleInt == -90)
                 {
-                    cv::transpose(cvMatFrame, cvMatFrame);
-                    if (flipFrame)
-                        cv::flip(cvMatFrame, cvMatFrame, -1);
-                    else
-                        cv::flip(cvMatFrame, cvMatFrame, 1);
+                    cv::rotate(cvMatFrame, dst, cv::ROTATE_90_COUNTERCLOCKWISE);
                 }
                 else
                     error("Rotation angle = " + std::to_string(rotationAngleInt)
                           + " != {0, 90, 180, 270} degrees.", __LINE__, __FUNCTION__, __FILE__);
+
+                frame = OP_CV2OPMAT(dst);
             }
         }
         catch (const std::exception& e)

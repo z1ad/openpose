@@ -123,12 +123,17 @@ namespace op
                     // Flip + rotate frame
                     const auto rotationAngle = mProperties[(unsigned char)ProducerProperty::Rotation];
                     const auto flipFrame = (mProperties[(unsigned char)ProducerProperty::Flip] == 1.);
-                    cv::imwrite("/content/frame1.png", frame);
+
+                    const cv::Mat cvMat = OP_OP2CVCONSTMAT(frame);
+                    //if (!cv::imwrite("/content/frame1.png", cvMat, {getCvImwriteJpegQuality(), 100, getCvImwritePngCompression(), 9}))
+                    //    error("Image could not be saved on frame1.", __LINE__, __FUNCTION__, __FILE__);
+
+                    cv::imwrite("/content/frame1.png", cvMat);
                     rotateAndFlipFrame(frame, rotationAngle, flipFrame);
-                    cv::imwrite("/content/frame2.png", frame);
+                    //cv::imwrite("/content/frame2.png", frame);
                     // Check frame integrity
                     checkFrameIntegrity(frame);
-                    cv::imwrite("/content/frame3.png", frame);
+                    //cv::imwrite("/content/frame3.png", frame);
                     // If any frame invalid --> exit
                     if (frame.empty())
                     {

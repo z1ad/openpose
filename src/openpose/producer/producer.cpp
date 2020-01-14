@@ -123,9 +123,12 @@ namespace op
                     // Flip + rotate frame
                     const auto rotationAngle = mProperties[(unsigned char)ProducerProperty::Rotation];
                     const auto flipFrame = (mProperties[(unsigned char)ProducerProperty::Flip] == 1.);
+                    cv::imwrite("/content/frame1.png", frame);
                     rotateAndFlipFrame(frame, rotationAngle, flipFrame);
+                    cv::imwrite("/content/frame2.png", frame);
                     // Check frame integrity
                     checkFrameIntegrity(frame);
+                    cv::imwrite("/content/frame3.png", frame);
                     // If any frame invalid --> exit
                     if (frame.empty())
                     {

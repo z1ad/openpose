@@ -300,13 +300,13 @@ namespace op
                 
                 auto width = get(CV_CAP_PROP_FRAME_WIDTH);
                 auto height = get(CV_CAP_PROP_FRAME_HEIGHT);
-                auto rotate = mProperties[(unsigned int)ProducerProperty::Rotation];
+                auto rotate = abs(mProperties[(unsigned int)ProducerProperty::Rotation] % 360);
                 
-                if (rotate == 90 || rotate == 270)
+                /*if (rotate != 0 && rotate != 180)
                 {
                     height = get(CV_CAP_PROP_FRAME_WIDTH);
                     width = get(CV_CAP_PROP_FRAME_HEIGHT);
-                }
+                }*/
 
                 if (mType != ProducerType::ImageDirectory
                       && ((frame.cols() != width && width > 0)

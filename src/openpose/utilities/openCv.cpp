@@ -255,7 +255,8 @@ namespace op
                     error("Rotation angle = " + std::to_string(rotationAngleInt)
                           + " != {0, 90, 180, 270} degrees.", __LINE__, __FUNCTION__, __FILE__);
 
-                frame = OP_CV2OPMAT(dst);
+                if (!dst.empty())
+                    frame = OP_CV2OPMAT(dst);
             }
         }
         catch (const std::exception& e)

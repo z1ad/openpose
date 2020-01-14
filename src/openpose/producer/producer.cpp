@@ -300,7 +300,7 @@ namespace op
                 
                 auto width = get(CV_CAP_PROP_FRAME_WIDTH);
                 auto height = get(CV_CAP_PROP_FRAME_HEIGHT);
-                auto rotate = abs(mProperties[(unsigned int)ProducerProperty::Rotation] % 360);
+                const auto rotate = abs((int)std::round(mProperties[(unsigned int)ProducerProperty::Rotation])) % 360;
                 
                 /*if (rotate != 0 && rotate != 180)
                 {
